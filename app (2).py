@@ -24,7 +24,7 @@ gemini = LLM( api_key=os.environ["GOOGLE_API_KEY"],
     model="gemini/gemini-1.5-flash",  # note the correct provider prefix
     verbose=True)
 
-# 1️⃣ Writer Agent: drafts the initial LinkedIn post
+# Writer Agent: drafts the initial LinkedIn post
 writer = Agent(
     role="Content Writer",
     goal="Draft an engaging LinkedIn post about Java applications in the IT field.",
@@ -33,7 +33,7 @@ writer = Agent(
     verbose=True
 )
 
-# 2️⃣ Editor Agent: refines the draft
+# Editor Agent: refines the draft
 editor = Agent(
     role="Content Editor",
     goal="Refine and polish the draft to improve clarity, tone, and engagement.",
@@ -42,7 +42,7 @@ editor = Agent(
     verbose=True
 )
 
-# ✍️ Define tasks
+# Define tasks
 draft_task = Task(
     agent=writer,
     description="Write a draft LinkedIn post covering key uses of Java in IT (enterprise, cloud, AI, migration).",
@@ -56,7 +56,7 @@ edit_task = Task(
     context=[draft_task]
 )
 
-# 🤝 Build the crew
+# Build the crew
 crew = Crew(
     agents=[writer, editor],
     tasks=[draft_task, edit_task],
@@ -64,7 +64,7 @@ crew = Crew(
     verbose=True
 )
 
-# 🚀 Run the crew
+# Run the crew
 result = crew.kickoff()
 
 print("\n✅ Final LinkedIn Post:\n")
